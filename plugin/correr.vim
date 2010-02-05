@@ -14,12 +14,11 @@ function! correr#send(cmd)
   let s:correr_is_working = 1
   call correr#open_result_window()
   normal! ggdG
-  call append(0, ':-D')
+  call append(0, printf(":-D <I'm running `%s`.", a:cmd))
   wincmd p
 
   let s:tmpfile = "/tmp/correr.txt"
-  let vim = "/Users/ujihisa/git/MacVim/src/MacVim/build/Release/MacVim.app/Contents/MacOS/Vim" " FIXME
-  let msg_send = printf("%s --remote-expr 'Correr\\#receive(\"%s\")'", vim, s:tmpfile)
+  let msg_send = printf("%s --remote-expr 'Correr\\#receive(\"%s\")'", $_, s:tmpfile)
   silent execute printf("!((%s) >& %s; %s) &", a:cmd, s:tmpfile, msg_send)
 endfunction
 
