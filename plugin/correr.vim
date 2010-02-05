@@ -14,7 +14,11 @@ function! correr#send(cmd)
   let s:correr_is_working = 1
   call correr#open_result_window()
   normal! ggdG
-  call append(0, printf(":-D <I'm running `%s`.", a:cmd))
+  if exists('g:correr_language') && g:correr_language == 'spanish'
+    call append(0, printf(":-D <Estoy corriendo. `%s`.", a:cmd))
+  else
+    call append(0, printf(":-D <I'm running `%s`.", a:cmd))
+  endif
   wincmd p
 
   let s:tmpfile = "/tmp/correr.txt"
