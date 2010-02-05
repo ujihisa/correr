@@ -15,7 +15,7 @@ function! correr#send(cmd)
   call correr#open_result_window()
   normal! ggdG
   if exists('g:correr_language') && g:correr_language == 'spanish'
-    call append(0, printf(":-D <Estoy corriendo. `%s`.", a:cmd))
+    call append(0, printf(":-D <Estoy corriendo `%s`.", a:cmd))
   else
     call append(0, printf(":-D <I'm running `%s`.", a:cmd))
   endif
