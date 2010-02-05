@@ -22,11 +22,11 @@ function! correr#send(cmd)
   wincmd p
 
   let s:tmpfile = "/tmp/correr.txt"
-  let msg_send = printf("%s --remote-expr 'Correr\\#receive(\"%s\")'", $_, s:tmpfile)
+  let msg_send = printf("%s --remote-expr 'correr\\#receive(\"%s\")'", $_, s:tmpfile)
   silent execute printf("!((%s) >& %s; %s) &", a:cmd, s:tmpfile, msg_send)
 endfunction
 
-function! Correr#receive(filename)
+function! correr#receive(filename)
   call correr#open_result_window()
   normal! ggdG
   call append(0, readfile(a:filename))
