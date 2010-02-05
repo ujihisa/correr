@@ -35,6 +35,18 @@ function! correr#receive(filename)
   let s:correr_is_working = 0
 endfunction
 
+function! correr#giveup()
+  call correr#open_result_window()
+  normal! ggdG
+  if exists('g:correr_language') && g:correr_language == 'spanish'
+    call append(0, 'X( <Me di por vencido...')
+  else
+    call append(0, 'X( <I gave up...')
+  endif
+
+  call append(1, 'ERROR: Not implemented')
+endfunction
+
 " From quickrun.vim
 function! correr#open_result_window()
   if !exists('s:bufnr')
@@ -56,6 +68,7 @@ endfunction
 
 let s:correr_is_working = 0
 command! -nargs=1 -complete=shellcmd Correr call correr#send(<q-args>)
+command! -nargs=0 CorrerGiveup call correr#giveup()
 
 nnoremap <Space>l :<C-u>Correr<Space>
 
